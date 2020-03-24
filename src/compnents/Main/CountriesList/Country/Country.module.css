@@ -1,0 +1,40 @@
+.countryItem{
+    background-color: #f0f0f0;
+    margin-bottom: 2px;
+    padding: 20px;
+}
+
+.countryItem h3{
+    color: #0072bc;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.countryItem p{
+    line-height: 20px;
+    font-size: 14px;
+    color: #585858;
+}
+
+.active{
+    background-color: #0072bc;
+    color: white;
+    position: relative;
+}
+.active p, .active h3{
+    color: white;
+}
+
+.active::after {
+    content: "";
+    width: 0;
+    height: 0;
+    right: -9px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 20px solid transparent;
+    border-left: 20px solid #0072BC;
+    border-bottom: 20px solid transparent;
+    position: absolute;
+}

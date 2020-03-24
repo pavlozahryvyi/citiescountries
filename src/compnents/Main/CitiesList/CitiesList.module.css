@@ -1,0 +1,98 @@
+.citiesBlock{
+    flex-basis: 75%;
+}
+
+.citiesBlock h2{
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #4d4d4d;
+}
+.citiesWrap{
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+}
+
+.cityItem{
+    padding: 15px 10px;
+}
+
+.addFormActive{
+    padding: 15px 10px;
+    background-color: #f7f7f7;
+    /*border-left: 1px solid #d8d8d8;*/
+}
+
+.addFormActive input, .addFormActive textarea{
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #d5d5d5;
+}
+
+.addFormActive input:focus{
+    border: 1px solid #9FCFEF;
+    /*outline: 1px solid #9FCFEF*/
+}
+
+.addFormActive textarea{
+    resize: none;
+    height: 100px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.cityItem p, .addFormActive p{
+    color: #0072bc;
+    font-weight: 700;
+    padding-bottom: 10px;
+
+}
+
+.addNewCityBtn{
+    padding: 10px 20px;
+    background-color: #0072bc;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+.inputField, .textareaField{
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.textareaField{
+    resize: none;
+    height: 50px;
+}
+
+.submitBtn{
+    padding: 10px 20px;
+    background-color: #0072bc;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px 10px 0;
+}
+
+.cancelBtn{
+    padding: 10px 20px;
+    background-color: white;
+    color: #636363;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #d5d5d5;
+}
+
+p.warning{
+    color: red;
+    display: inline-block;
+    margin-left: 40px;
+}

@@ -1,0 +1,103 @@
+.cityItem{
+    padding: 10px;
+    border-top: 1px solid #d8d8d8;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cityItem:first-child{
+    flex-basis: 75%;
+}
+
+.cityItem:last-child{
+    flex-basis: 20%;
+}
+
+.cityItem h4{
+    color: #585858;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.cityItem p{
+    line-height: 20px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.inputField, .textareaField{
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #d5d5d5;
+}
+
+.inputField:focus{
+    border: 1px solid #9FCFEF;
+}
+
+.textareaField{
+    resize: none;
+    height: 100px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.submitBtn{
+    padding: 10px 20px;
+    background-color: #0072bc;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px 10px 0;
+}
+
+.cancelBtn{
+    padding: 10px 20px;
+    background-color: white;
+    color: #636363;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #d5d5d5;
+}
+
+.editBlock{
+    background-color: #f7f7f7;
+    padding: 10px;
+    overflow: hidden;
+    /*border-left: 1px solid #d5d5d5;*/
+    border-top: 1px solid #d5d5d5;
+}
+
+.editBlock p{
+    color: #0072BC;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.controlBtnBlock{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controlBtn{
+    margin: 0 6px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+p.warning{
+    color: red;
+    display: inline-block;
+    margin-left: 40px;
+}
