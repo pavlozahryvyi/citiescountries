@@ -2,57 +2,16 @@ import React, {Component} from 'react';
 import CountriesList from "./CountriesList/CountriesList";
 import CitiesList from "./CitiesList/CitiesList";
 import styles from './Main.module.css'
+import uuid from 'uuid';
 
 class Main extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            countries: [],
-            cities: [],
-            selectedCountryId: 1
-        };
-    }
-
-    addNewCity = (cityData) => {
-        console.log('add new city method');
-        let citiesIdArray = this.props.store.cities.map(el => el['id']);
-        let newCityId = Math.max(...citiesIdArray);
-        let newCity = {
-            "id": newCityId + 1,
-            "country_id": cityData["country_id"],
-            "title": cityData["title"],
-            "desc": cityData["desc"]
-        };
-
-        this.state.cities.push(newCity);
-        console.log(this.state);
-
+    state = {
+        countries: [],
+        cities: [],
+        selectedCountryId: 1
     };
 
-    editCity = (cityData) => {
-        let citiesArray = this.state.cities.map((el) => {
-            if (el['id'] === cityData.id) {
-                el['title'] = cityData.title;
-                el['desc'] = cityData.desc
-            }
-            return el;
-        });
-        this.setState({
-            cities: citiesArray
-        })
-    };
-
-    deleteCity = (cityId) => {
-        let citiesArray = this.state.cities.filter((el) => {
-            if(el.id !== cityId){
-                return el;
-            }
-        });
-        this.setState({
-            cities: citiesArray
-        })
-    };
 
     componentDidMount() {
         this.setState({
@@ -60,20 +19,49 @@ class Main extends Component {
         })
     }
 
-    getCountryId(id) {
+    addNewCity = (cityData) => {
+        const { cities } = this.state;
+
+        this.setState({
+            cities: [ ...cities, {id: uuid.v4(), ...cityData}]
+        })
+    };
+
+    editCity = (cityData) => {
+        const { cities } = this.state;
+
+        this.setState({
+            cities: cities.map(city => city.id === cityData.id ? { ...city, title: cityData.title, desc: cityData.desc} : city)
+        })
+    };
+
+    deleteCity = (cityId) => {
+        const { cities } = this.state;
+
+        this.setState({
+            cities: cities.filter(city => city.id !== cityId)
+        })
+    };
+
+
+    getCountryId = (id) => {
         this.setState({selectedCountryId: id});
-    }
+    };
 
     render() {
+        const { selectedCountryId, countries, cities } = this.state;
+
         return (
             <div className={styles.container}>
-                <CountriesList selectedCountryId = {this.state.selectedCountryId} getId={this.getCountryId.bind(this)} countries={this.state.countries}/>
+                <CountriesList selectedCountryId={selectedCountryId}
+                               getId={this.getCountryId}
+                               countries={countries}/>
                 <CitiesList
                     addNewCity={this.addNewCity}
                     editCity={this.editCity}
                     deleteCity={this.deleteCity}
                     countryId={this.state.selectedCountryId}
-                    cities={this.state.cities}/>
+                    cities={cities}/>
             </div>
         )
     }

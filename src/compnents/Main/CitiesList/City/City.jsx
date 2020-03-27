@@ -6,28 +6,84 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class City extends Component{
-    constructor(props){
-        super(props);
+    
+    state = {
+        cityTitle: this.props.title,
+        cityDesc: this.props.desc,
+    
+        isOpenFormAdd: false,
+        isOpenCityInfo: true,
+    
+        showWarning: false,
+    };
 
-        this.state = {
-            inputValue: this.props.title,
-            textareaValue: this.props.desc,
+    editCity = () => {
+        if(this.validateFields()){
+            this.props.editCity({
+                id: this.props.cityId,
+                title: this.state.cityTitle,
+                desc: this.state.cityDesc
+            });
+            this.closeEditForm();
+        }
+    };
 
+    validateFields = () => {
+        if( this.state.cityTitle.trim() !== '' && this.state.cityDesc.trim() !== '')
+            return true;
+
+        if(this.state.cityTitle.trim() === '')
+            this.setState({ cityTitle: '' });
+
+        if(this.state.cityDesc.trim() === '')
+            this.setState({cityDesc: ''});
+
+        this.setState({showWarning: true});
+        return false;
+    };
+
+    deleteCity = () => {
+        this.props.deleteCity(this.props.cityId);
+    };
+
+    handleChange = (event) => {
+        const {value, name} = event.target;
+
+        this.setState({
+            [name] : value
+        })
+    };
+
+    openEditCityForm = () =>{
+        this.setState({
+            isOpenFormAdd: true,
+            isOpenCityInfo: false
+        })
+    };
+
+    closeEditForm = () => {
+        this.setState({
             isOpenFormAdd: false,
             isOpenCityInfo: true,
-
-            showWarning: false,
-        }
-
-    }
+            showWarning: false
+        })
+    };
 
     render(){
         const warning = this.state.showWarning && <p className={styles.warning}>All fields are required</p>;
 
         const editCityForm = this.state.isOpenFormAdd && <div className={styles.editBlock}>
             <p>Edit city {this.props.title}</p>
-            <input type="text" value={this.state.inputValue} onChange={this.handleChange} className={styles.inputField}/>
-            <textarea onChange={this.handleChange} value={this.state.textareaValue} className={styles.textareaField}/>
+            <input
+                name={`cityTitle`}
+                type="text" value={this.state.cityTitle}
+                onChange={this.handleChange}
+                className={styles.inputField}/>
+            <textarea
+                name={`cityDesc`}
+                onChange={this.handleChange}
+                value={this.state.cityDesc}
+                className={styles.textareaField}/>
             <button className={styles.submitBtn} onClick={this.editCity}>Submit</button>
             <button onClick={this.closeEditForm} className={styles.cancelBtn}>Cancel</button>
             {warning}
@@ -54,54 +110,6 @@ class City extends Component{
                 {editCityForm}
             </div>
         )
-    }
-
-    editCity = () => {
-
-        if(this.state.inputValue !== '' && this.state.textareaValue){
-            this.props.editCity({
-                id: this.props.cityId,
-                title: this.state.inputValue,
-                desc: this.state.textareaValue
-            });
-            this.closeEditForm();
-        }else{
-            this.setState({
-                showWarning: true,
-            });
-        }
-    };
-
-    deleteCity = () => {
-        this.props.deleteCity(this.props.cityId);
-    };
-
-    handleChange = (event) => {
-        if(event.target.tagName === 'INPUT'){
-            this.setState({
-                inputValue: event.target.value,
-            })
-        }else if(event.target.tagName === 'TEXTAREA'){
-            this.setState({
-                textareaValue: event.target.value,
-            })
-        }
-    };
-
-    openEditCityForm = () =>{
-        this.setState({
-            isOpenFormAdd: true,
-            isOpenCityInfo: false
-        })
-    };
-
-    closeEditForm = () => {
-        this.setState({
-
-            isOpenFormAdd: false,
-            isOpenCityInfo: true,
-            showWarning: false
-        })
     }
 }
 
