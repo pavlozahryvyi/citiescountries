@@ -17,6 +17,20 @@ class City extends Component{
         showWarning: false,
     };
 
+    validateFields = () => {
+        if (this.state.cityTitle.trim() !== '' && this.state.cityDesc.trim() !== '')
+            return true;
+
+        if (this.state.cityTitle.trim() === '')
+            this.setState({cityTitle: ''});
+
+        if (this.state.cityDesc.trim() === '')
+            this.setState({cityDesc: ''});
+
+        this.setState({showWarning: true});
+        return false;
+    };
+
     editCity = () => {
         if(this.validateFields()){
             this.props.editCity({
@@ -24,22 +38,13 @@ class City extends Component{
                 title: this.state.cityTitle,
                 desc: this.state.cityDesc
             });
-            this.closeEditForm();
+
+            this.setState({
+                isOpenFormAdd: false,
+                isOpenCityInfo: true,
+                showWarning: false,
+            });
         }
-    };
-
-    validateFields = () => {
-        if( this.state.cityTitle.trim() !== '' && this.state.cityDesc.trim() !== '')
-            return true;
-
-        if(this.state.cityTitle.trim() === '')
-            this.setState({ cityTitle: '' });
-
-        if(this.state.cityDesc.trim() === '')
-            this.setState({cityDesc: ''});
-
-        this.setState({showWarning: true});
-        return false;
     };
 
     deleteCity = () => {
@@ -50,7 +55,7 @@ class City extends Component{
         const {value, name} = event.target;
 
         this.setState({
-            [name] : value
+            [name]: value
         })
     };
 
@@ -63,27 +68,23 @@ class City extends Component{
 
     closeEditForm = () => {
         this.setState({
+            cityTitle: this.props.title,
+            cityDesc: this.props.desc,
+
             isOpenFormAdd: false,
             isOpenCityInfo: true,
-            showWarning: false
+            showWarning: false,
         })
     };
 
     render(){
+
         const warning = this.state.showWarning && <p className={styles.warning}>All fields are required</p>;
 
         const editCityForm = this.state.isOpenFormAdd && <div className={styles.editBlock}>
             <p>Edit city {this.props.title}</p>
-            <input
-                name={`cityTitle`}
-                type="text" value={this.state.cityTitle}
-                onChange={this.handleChange}
-                className={styles.inputField}/>
-            <textarea
-                name={`cityDesc`}
-                onChange={this.handleChange}
-                value={this.state.cityDesc}
-                className={styles.textareaField}/>
+            <input name={`cityTitle`} type="text" value={this.state.cityTitle} onChange={this.handleChange} className={styles.inputField}/>
+            <textarea name={`cityDesc`} onChange={this.handleChange} value={this.state.cityDesc} className={styles.textareaField}/>
             <button className={styles.submitBtn} onClick={this.editCity}>Submit</button>
             <button onClick={this.closeEditForm} className={styles.cancelBtn}>Cancel</button>
             {warning}
