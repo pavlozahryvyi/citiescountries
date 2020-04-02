@@ -39,11 +39,12 @@ class City extends Component{
                 desc: this.state.cityDesc
             });
 
-            this.setState({
+            /*this.setState({
                 isOpenFormAdd: false,
                 isOpenCityInfo: true,
                 showWarning: false,
-            });
+            });*/
+            this.closeEditForm();
         }
     };
 
@@ -68,8 +69,8 @@ class City extends Component{
 
     closeEditForm = () => {
         this.setState({
-            cityTitle: this.props.title,
-            cityDesc: this.props.desc,
+            // cityTitle: this.props.title,
+            // cityDesc: this.props.desc,
 
             isOpenFormAdd: false,
             isOpenCityInfo: true,
@@ -77,7 +78,37 @@ class City extends Component{
         })
     };
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        // console.log('--this.props', this.props);
+        // console.log('--prevProps', prevProps);
+        // console.log('--this.state', this.state);
+        // console.log('--prevState', prevState);
+
+        if (!this.state.isOpenFormAdd) {
+            if ((this.props.title.trim() !== '' && this.state.cityTitle.trim() === '')
+                || (this.props.title !== this.state.cityTitle)) {
+                console.log('Yo!');
+                this.setState({
+                    cityTitle: this.props.title
+                })
+            }
+            if ((this.props.desc.trim() !== '' && this.state.cityDesc.trim() === '')
+                || (this.props.desc !== this.state.cityDesc)) {
+                console.log('Yo!');
+                this.setState({
+                    cityDesc: this.props.desc
+                })
+            }
+        }
+    }
+
+
+
     render(){
+
+        // console.log('---props', this.props);
+        // console.log('---state', this.state);
 
         const warning = this.state.showWarning && <p className={styles.warning}>All fields are required</p>;
 

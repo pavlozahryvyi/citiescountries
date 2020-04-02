@@ -11,9 +11,9 @@ function App(props) {
                 </div>
             </header>
             <div className={styles.main}>
-                <div className={styles.center}>
+                {/*<div className={styles.center}>*/}
                     <Main store={props.store}/>
-                </div>
+                {/*</div>*/}
             </div>
             <footer className={styles.footer}>
                 <div className={styles.center}>
