@@ -64,12 +64,15 @@ class CitiesList extends Component {
     };
 
     render() {
-        let citiesArray = this.props.cities.filter((el) => el.country_id === this.props.countryId);
+        const { countryId, deleteCity, editCity, cities } = this.props;
+
+
+        let citiesArray = cities.filter((el) => el.country_id === countryId);
 
         let citiesArrayRender = citiesArray.map((el) =>
             <City
-                editCity={this.props.editCity}
-                deleteCity={this.props.deleteCity}
+                editCity={editCity}
+                deleteCity={deleteCity}
                 key={el.id}
                 cityId={el.id}
                 title={el.title}
@@ -77,7 +80,7 @@ class CitiesList extends Component {
             />);
 
 
-        const displayAddNewCityButton = this.props.countryId && this.state.isOpenBtnAdd &&
+        const displayAddNewCityButton = countryId && this.state.isOpenBtnAdd &&
             <div className={styles.cityItem}>
                 <button onClick={this.openAddCityForm} className={styles.addNewCityBtn}>+ Add city</button>
             </div>;
@@ -99,8 +102,8 @@ class CitiesList extends Component {
                     placeholder={`Country description...`}
                     value={this.state.cityDesc}
                     onChange={this.handleChange}
-                    className={styles.textareaField}></textarea>
-                <button onClick={this.addNewCity} className={styles.submitBtn}>Submit</button>
+                    className={styles.textareaField} />
+                    <button onClick={this.addNewCity} className={styles.submitBtn}>Submit</button>
                 <button onClick={this.showAddButton} className={styles.cancelBtn}>Cancel</button>
                 {warning}
             </div>;

@@ -1,16 +1,16 @@
 import React from 'react';
 import styles from "./Country.module.css"
 
-function Country(props) {
+function Country({id, title, text, activeClass, setCountryId}) {
 
     function setId() {
-        props.setCountryId(props.id);
+        setCountryId(id);
     }
 
     return (
-        <div onClick={setId} className={styles.countryItem + ' ' + styles[props.activeClass]}>
-            <h3>{props.title}</h3>
-            <p>{props.text}</p>
+        <div onClick={setId} className={styles.countryItem + ' ' + styles[activeClass]}>
+            <h3>{title}</h3>
+            <p>{text}</p>
         </div>
     )
 }
